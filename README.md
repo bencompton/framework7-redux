@@ -5,6 +5,6 @@
 
 What Framework7 Redux does is sync state in Framework7 with your store. It also provides actions that you can call to do things like navigate to a URL, go back, and show + hide an alert.
 
-This is primarily being designed with Framework7 React in mind, but Redux is also used with [Vue](https://vuejs.org), so it shouldn't take much work to make this work with [Framework7 Vue](https://github.com/nolimits4web/Framework7-Vue) as well. Vue users are more likely to want to use [VueX](https://github.com/vuejs/vuex), and the goal is that much of the code in this library will be re-used in a VueX version.
+This is primarily being designed with Framework7 React in mind, but Redux is also used with [Vue](https://vuejs.org), so it shouldn't take much work to make this work with [Framework7 Vue](https://github.com/nolimits4web/Framework7-Vue) as well. Vue users are more likely to want to use [VueX](https://github.com/vuejs/vuex), and the goal is that much of the code in this library will be shared with a VueX version.
 
 This project is a work in progress, so stay tuned. There will be much more functionality to come.
