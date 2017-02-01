@@ -1,6 +1,8 @@
 //Modal actions
 export const SHOW_ALERT = '@@FRAMEWORK7_SHOW_ALERT';
 export const CLOSE_ALERT = '@@FRAMEWORK7_CLOSE_ALERT';
+export const SHOW_PRELOADER = '@@FRAMEWORK7_SHOW_PRELOADER';
+export const HIDE_PRELOADER = '@@FRAMEWORK7_HIDE_PRELOADER';
 
 //Routing actions
 export const NAVIGATE_TO = '@@FRAMEWORK7_NAVIGATE_TO';

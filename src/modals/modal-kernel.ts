@@ -24,6 +24,14 @@ export class ModalKernel extends StateKernelChild {
         if (this.alertModal) {
             this.framework7.closeModal(this.alertModal);
             this.alertModal = null;
-        }        
+        }
+    }
+
+    public showPreloader() {
+        this.framework7.showPreloader();
+    }
+
+    public hidePreloader() {
+        this.framework7.hidePreloader();
     }
 }
