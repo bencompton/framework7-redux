@@ -1,4 +1,4 @@
-import * as camelCase from 'camelcase';
+import {camelCase} from 'change-case';
 
 import {StateKernelChild} from './state-kernel-child';
 import {RoutingKernel} from './routing/routing-kernel';
