@@ -7,7 +7,6 @@ export const HIDE_PRELOADER = '@@FRAMEWORK7_HIDE_PRELOADER';
 //Routing actions
 export const NAVIGATE_TO = '@@FRAMEWORK7_NAVIGATE_TO';
 export const GO_BACK = '@@FRAMEWORK7_GO_BACK';
-export const HISTORY_UPDATED = '@@FRAMEWORK7_HISTORY_UPDATED';
 
 export interface IFramework7Action extends Redux.Action {    
     args: any;
