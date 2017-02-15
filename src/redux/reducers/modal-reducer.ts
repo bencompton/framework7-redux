@@ -1,18 +1,5 @@
-import {IFramework7Action, SHOW_ALERT, CLOSE_ALERT, SHOW_PRELOADER, HIDE_PRELOADER} from '../actions';
-
-export interface IAlertState {
-    title: string;
-    text: string;    
-}
-
-export interface IPreloaderState {
-    visible: boolean;
-}
-
-export interface IModalState {
-    alert: IAlertState;    
-    preloader: IPreloaderState;
-}
+import {IFramework7Action, SHOW_ALERT, CLOSE_ALERT, SHOW_PRELOADER, HIDE_PRELOADER} from '../actions/actions';
+import {IModalState, IAlertState, IPreloaderState} from '../state/modals-state';
 
 const initialState: IModalState = {
     alert: null,

@@ -1,4 +1,4 @@
-import {createFramework7Action, NAVIGATE_TO, GO_BACK} from '../actions';
+import {createFramework7Action, NAVIGATE_TO, GO_BACK} from './framework7-actions';
 
 export const navigateTo = (path: string, replace?: boolean) => {
     return createFramework7Action(NAVIGATE_TO, {

@@ -1,4 +1,4 @@
-import {createFramework7Action, SHOW_ALERT, CLOSE_ALERT, SHOW_PRELOADER, HIDE_PRELOADER} from '../actions';
+import {createFramework7Action, SHOW_ALERT, CLOSE_ALERT, SHOW_PRELOADER, HIDE_PRELOADER} from './framework7-actions';
 
 export const showAlert = (text: string, title?: string) => {
     return createFramework7Action(SHOW_ALERT, {

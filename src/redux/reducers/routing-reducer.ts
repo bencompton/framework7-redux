@@ -1,9 +1,5 @@
 import {IFramework7Action, NAVIGATE_TO, GO_BACK} from '../actions';
 
-export interface IRoutingState {
-    history: string[];
-}
-
 const initialState: IRoutingState = {
     history: []
 };
