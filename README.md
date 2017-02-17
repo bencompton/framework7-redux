@@ -1,7 +1,7 @@
 # Framework7 Redux
 ### Redux bindings to keep your Redux store in sync with Framework7
 
-[Framework7 React](https://github.com/bencompton/framework7-react) and [Framework7 Vue]((https://github.com/nolimits4web/Framework7-Vue) rely on [Framework7](https://github.com/nolimits4web/Framework7) JavaScript to provide functionality like routing and showing + hiding modals. This means that there is state in Framework7 for things like the current URL, whether or not a modal is showing, etc. This state is therefore not available in your store, which means that things like time travel debugging and server rendering with server state sent to the client state won't work.
+[Framework7 React](https://github.com/bencompton/framework7-react) and [Framework7 Vue](https://github.com/nolimits4web/Framework7-Vue) rely on [Framework7](https://github.com/nolimits4web/Framework7) JavaScript to provide functionality like routing and showing + hiding modals. This means that there is state in Framework7 for things like the current URL, whether or not a modal is showing, etc. This state is therefore not available in your store, which means that things like time travel debugging and server rendering with server state sent to the client state won't work.
 
 What Framework7 Redux does is sync state in Framework7 with your store. It also provides actions that you can call to do things like navigate to a URL, go back, and show + hide an alert.
 
@@ -46,7 +46,6 @@ syncFramework7WithStore(store, framework7StateKernel);
 Finally, configure your Framework7App component:
 
 ```javascript
-import {Provider} from 
 import {routes} from './routes';
 import {store, framework7StateKernel} from './store';
 
@@ -63,7 +62,7 @@ const MyApp = () => {
 };
 ```
 
-Note that the Framework7 param `router` should be `false` as shown above to disable the default automatic framework7 routing behavior (as described below) and allow routes to be controlled strictly from actions.
+Note that the Framework7 param `router` should be `false` as shown above to disable the default automatic Framework7 routing behavior (as described below) and allow routes to be controlled strictly from actions.
 
 ### Navigation
 
