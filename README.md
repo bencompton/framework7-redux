@@ -90,7 +90,7 @@ store.dispatch(goBack());
 
 ### Modals
 
-Framework7 React and Framework7 Vue do not provide components . While fine for simpler apps, it is better to control modals via actions. Modal support is still a work in progress in Framework7 Redux, but a few options are currently supported:
+Framework7 React and Framework7 Vue do not provide components to accomplish things like alert dialogs, confirm dialogs, and the preloader. Instead, they require calling Framework7's API for modals. While this approach is fine for simpler apps, it is better to control modals via actions so their state will be in your store. Modal support is still a work in progress in Framework7 Redux, but a few options are currently supported:
 
 ```javascript
 	import {showAlert, closeAlert, showPreloader, hidePreloader} from 'framework7-redux'
