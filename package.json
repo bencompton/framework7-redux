@@ -1,6 +1,6 @@
 {
   "name": "framework7-redux",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
@@ -34,8 +34,5 @@
   },
   "peerDependencies": {
     "redux": "3.x.x"
-  },
-  "dependencies": {    
-    "change-case": "^3.0.0"
   }
 }

@@ -1,11 +1,12 @@
-import {Framework7StateKernel} from './framework7-state-kernel';
-import {showAlert, closeAlert, showPreloader, hidePreloader} from './modals/modal-actions';
-import {navigateTo, goBack} from './routing/routing-actions';
-import {framework7Reducer, IFramework7State} from './reducer';
-import {framework7Middleware} from './middleware';
+import {Framework7StateKernel} from './state-kernels/framework7-kernel';
+import {showAlert, closeAlert, showPreloader, hidePreloader} from './redux/actions/modal-actions';
+import {navigateTo, goBack} from './redux/actions/routing-actions';
+import {framework7Reducer} from './redux/reducers/framework7-reducer';
+import {IFramework7State} from './state/framework7-state';
+import {syncFramework7WithStore} from './redux/sync';
 
 export {
     Framework7StateKernel,
     navigateTo, goBack, showAlert, closeAlert, showPreloader, hidePreloader,
-    framework7Reducer, IFramework7State, framework7Middleware
+    framework7Reducer, IFramework7State, syncFramework7WithStore
 };
