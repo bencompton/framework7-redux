@@ -5,13 +5,13 @@
 
 What Framework7 Redux does is sync state in Framework7 with your store. It also provides actions that you can call to do things like navigate to a URL, go back, and show + hide an alert.
 
-This is primarily being designed with Framework7 React in mind, but Redux is also used with [Vue](https://vuejs.org), so this library should be perfectly usable with [Framework7 Vue](https://github.com/nolimits4web/Framework7-Vue) as well. Vue users are more likely to want to use [VueX](https://github.com/vuejs/vuex), and the goal is that much of the code in this library will be shared with a VueX version in the future.
+This is primarily being designed with Framework7 React in mind, but Redux is also used with [Vue](https://vuejs.org), so this library should be perfectly usable with [Framework7 Vue](https://github.com/nolimits4web/Framework7-Vue) as well once Framework7 Vue is updated to support Framework7 Redux. However, Vue users are more likely to want to use [VueX](https://github.com/vuejs/vuex), and the goal is that much of the code in this library will be shared with a VueX version in the future.
 
 This project is a work in progress, so stay tuned. There will be much more functionality to come.
 
 ### Who should use Framework7 Redux?
 
-If you aren't already familiar with Redux, Framework7, and either Framework7 React or Framework7 Vue, then you will probably want to go learn those libraries before using Framework7 Redux.
+If you aren't already familiar with [Redux](https://github.com/reactjs/redux), [Framework7](http://framework7.io), and either [Framework7 React](https://github.com/bencompton/framework7-react) or [Framework7 Vue](https://github.com/nolimits4web/Framework7-Vue), then you will probably want to go learn those libraries before using Framework7 Redux.
 
 Note that **this library is not mandatory** for using Redux with Framework7 React and Framework7 Vue. When you use Redux with Framework7 React or Framework7 Vue, you're using state from your store to control what prop values get passed into your components and re-rendering your components when the state changes. This works just fine without this library.
 
