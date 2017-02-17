@@ -4,7 +4,7 @@ import {RoutingKernel} from './routing-kernel';
 import {ModalKernel} from './modal-kernel';
 
 export class Framework7StateKernel extends StateKernel<IFramework7State> {
-    constructor(testMode: boolean) {
+    constructor(testMode: boolean = false) {
         super(testMode);
 
         this.children = [
@@ -16,6 +16,6 @@ export class Framework7StateKernel extends StateKernel<IFramework7State> {
     protected handleStateChange() {}
 
     protected getState(fullState: any) {
-        return fullState as IFramework7State;
+        return fullState.framework7 as IFramework7State;
     }
 }

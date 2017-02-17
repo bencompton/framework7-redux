@@ -1,12 +1,18 @@
-import {IFramework7Action, SHOW_ALERT, CLOSE_ALERT, SHOW_PRELOADER, HIDE_PRELOADER} from '../actions/actions';
-import {IModalState, IAlertState, IPreloaderState} from '../state/modals-state';
+import {combineReducers} from 'redux';
+import {IFramework7Action, SHOW_ALERT, CLOSE_ALERT, SHOW_PRELOADER, HIDE_PRELOADER} from '../actions/framework7-actions';
+import {IModalState, IAlertState, IPreloaderState} from '../../state/modals-state';
 
-const initialState: IModalState = {
-    alert: null,
-    preloader: null
-}
+const initialAlertState = {
+    title: null,
+    text: null
+};
 
-export const alertReducer = (state: IAlertState, action: IFramework7Action) => {
+const initialPreloaderState = {
+    title: null,
+    visible: false
+};
+
+export const alertReducer = (state: IAlertState = initialAlertState, action: IFramework7Action) => {
     switch (action.type) {
         case SHOW_ALERT:
             return {
@@ -23,22 +29,24 @@ export const alertReducer = (state: IAlertState, action: IFramework7Action) => {
     }
 };
 
-export const preloaderReducer = (state: IPreloaderState, action: IFramework7Action) => {
+export const preloaderReducer = (state: IPreloaderState = initialPreloaderState, action: IFramework7Action) => {
     switch (action.type) {
         case SHOW_PRELOADER:
             return {
+                title: action.args.title,
                 visible: true
             };
         case HIDE_PRELOADER:
             return {
+                title: null,
                 visible: false
             };
+        default:
+            return state;
     }
 };
 
-export const modalsReducer = (state: IModalState = initialState, action: IFramework7Action) => {
-    return {
-        alert: alertReducer(state.alert, action),
-        preloader: preloaderReducer(state.preloader, action)
-    };
-};
+export const modalsReducer = combineReducers<IModalState>({
+    alert: alertReducer,
+    preloader: preloaderReducer
+});

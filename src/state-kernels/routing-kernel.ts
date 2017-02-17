@@ -1,6 +1,8 @@
 import {StateKernel} from '../state-kernel';
 import {IRoutingState} from '../state/routing-state';
 import {IFramework7State} from '../state/framework7-state';
+import {navigateTo} from '../redux/actions/routing-actions';
+import {HistoryReconciler} from './routing/history-reconciler';
 
 export class RoutingKernel extends StateKernel<IRoutingState> {
     private previousHistory: string[];
@@ -13,41 +15,32 @@ export class RoutingKernel extends StateKernel<IRoutingState> {
         this.reconcileHistories(state.history);        
     }
 
+    onFramework7Set() {
+        this.initializeHistory();
+    }
+
+    private initializeHistory() {
+        if (this.mainView.history.length) {
+            this.mainView.history.forEach(f7HistoryUrl => {
+                this.dispatchAction(navigateTo(f7HistoryUrl));
+            });            
+        }        
+    }
+
     private reconcileHistories(newHistory: string[]) {
-        const mainView = this.mainView;
-        const f7History: string[] = this.mainView.history;
+        if (!this.router || !this.framework7) return;
 
-        let historyIndex = 0;
-
-        //Bring Framework7 back to the last matching point in the state history
-        while (historyIndex < newHistory.length) {
-            const currentNewHistoryUrl = newHistory[historyIndex];
-            const currentF7HistoryUrl = f7History[historyIndex];
-
-            if (currentF7HistoryUrl && currentF7HistoryUrl) {
-                const f7PagePath = this.router.findMatchingRoute(currentF7HistoryUrl);
-                const newHistoryPagePath = this.router.findMatchingRoute(currentNewHistoryUrl);
-
-                if (f7PagePath !== newHistoryPagePath) {
-                    const pagesToGoBack = (f7History.length - historyIndex);
-                    this.goBack(pagesToGoBack);
-                    historyIndex++;
-                    break;
+        const reconciler = new HistoryReconciler(this.router, this.mainView.history, newHistory);
+        
+        reconciler
+            .getOperationsToReconcileHistories()
+            .forEach(operation => {
+                if (operation.forward) {                    
+                    this.router.changeRoute(operation.url, this.mainView, { reload: operation.replace, url: operation.url });                    
+                } else {
+                    this.router.changeRoute(operation.url, this.mainView, { url: operation.url, isBack: true });                    
                 }
-            }
-
-            historyIndex++;            
-        }
-
-        if (f7History.length > newHistory.length) {
-            this.goBack(f7History.length - newHistory.length);
-        }
-
-        //Move Framework7 forward to the last point in state history
-        while (historyIndex < newHistory.length) {
-            this.navigateTo(newHistory[historyIndex], false);
-            historyIndex++;
-        }
+            });
     }
 
     private get mainView() {
@@ -65,16 +58,4 @@ export class RoutingKernel extends StateKernel<IRoutingState> {
 
         return mainView;
     }
-
-    private navigateTo(path: string, reload: boolean) {
-        this.router.changeRoute(path, this.mainView, { reload });
-    }
-
-    private goBack(numberOfTimes = 1) {
-        const path = '';
-
-        for (let i = 0; i < numberOfTimes; i++) {
-            this.router.changeRoute(path, this.mainView, { isBack: true });            
-        }
-    }   
 }

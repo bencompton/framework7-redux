@@ -1,5 +1,6 @@
 import {StateKernel} from '../../state-kernel';
 import {IAlertState, IModalState} from '../../state/modals-state';
+import {closeAlert} from '../../redux/actions/modal-actions';
 
 export class AlertKernel extends StateKernel<IAlertState> {
     private alertModal: any;

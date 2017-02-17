@@ -1,10 +1,14 @@
-import {IFramework7Action, NAVIGATE_TO, GO_BACK} from '../actions';
+import {combineReducers} from 'redux';
+import {IFramework7Action, NAVIGATE_TO, GO_BACK} from '../actions/framework7-actions';
+import {IRoutingState} from '../../state/routing-state';
 
 const initialState: IRoutingState = {
     history: []
 };
 
-export const historyReducer = (state: string[], action: IFramework7Action) => {
+
+
+export const historyReducer = (state: string[] = [], action: IFramework7Action) => {
     switch (action.type) {
         case NAVIGATE_TO:
             const history = action.args.replace ? state.slice(0, state.length - 1) : state;
@@ -16,22 +20,12 @@ export const historyReducer = (state: string[], action: IFramework7Action) => {
         case GO_BACK:        
             return [
                 ...state.slice(0, state.length - 1)
-            ];        
-    }
-};
-
-export const routingReducer = (state: IRoutingState = initialState, action: IFramework7Action) => {
-    switch (action.type) {
-        case NAVIGATE_TO:
-        case GO_BACK:
-            return {
-                history: historyReducer(state.history, action)
-            }
-        case GO_BACK:
-            return {
-
-            };
+            ]; 
         default:
             return state;
     }
 };
+
+export const routingReducer = combineReducers<IRoutingState>({
+    history: historyReducer
+});

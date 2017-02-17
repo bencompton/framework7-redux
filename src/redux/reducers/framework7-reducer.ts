@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 
-import {IFramework7State} from '../state/framework7-state';
+import {IFramework7State} from '../../state/framework7-state';
 import {routingReducer} from './routing-reducer';
 import {modalsReducer} from './modal-reducer';
 

@@ -11,8 +11,10 @@ export const closeAlert = () => {
     return createFramework7Action(CLOSE_ALERT);
 };
 
-export const showPreloader = () => {
-    return createFramework7Action(SHOW_PRELOADER);
+export const showPreloader = (title?: string) => {
+    return createFramework7Action(SHOW_PRELOADER, {
+        title
+    });
 };
 
 export const hidePreloader = () => {
