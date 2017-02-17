@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {IFramework7Action, SHOW_ALERT, CLOSE_ALERT, SHOW_PRELOADER, HIDE_PRELOADER} from '../actions/framework7-actions';
+import {ModalAction, ShowAlertAction, CloseAlertAction, ShowPreloaderAction, HidePreloaderAction} from '../actions/framework7-actions';
 import {IModalState, IAlertState, IPreloaderState} from '../../state/modals-state';
 
 const initialAlertState = {
@@ -8,18 +8,18 @@ const initialAlertState = {
 };
 
 const initialPreloaderState = {
-    title: null,
+    loadingText: null,
     visible: false
 };
 
-export const alertReducer = (state: IAlertState = initialAlertState, action: IFramework7Action) => {
+export const alertReducer: Redux.Reducer<IAlertState> = (state: IAlertState = initialAlertState, action: ModalAction) => {
     switch (action.type) {
-        case SHOW_ALERT:
+        case '@@FRAMEWORK7_SHOW_ALERT':
             return {
-                title: action.args.title,
-                text: action.args.text                               
+                title: action.title,
+                text: action.text                               
             };
-        case CLOSE_ALERT:
+        case '@@FRAMEWORK7_CLOSE_ALERT':
             return {
                 title: null,
                 text: null
@@ -29,16 +29,16 @@ export const alertReducer = (state: IAlertState = initialAlertState, action: IFr
     }
 };
 
-export const preloaderReducer = (state: IPreloaderState = initialPreloaderState, action: IFramework7Action) => {
+export const preloaderReducer: Redux.Reducer<IPreloaderState> = (state: IPreloaderState = initialPreloaderState, action: ModalAction) => {
     switch (action.type) {
-        case SHOW_PRELOADER:
+        case '@@FRAMEWORK7_SHOW_PRELOADER':
             return {
-                title: action.args.title,
+                loadingText: action.loadingText,
                 visible: true
             };
-        case HIDE_PRELOADER:
+        case '@@FRAMEWORK7_HIDE_PRELOADER':
             return {
-                title: null,
+                loadingText: null,
                 visible: false
             };
         default:

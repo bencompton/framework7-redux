@@ -5,7 +5,7 @@ export interface IAlertState {
 
 export interface IPreloaderState {
     visible: boolean;
-    title?: string;
+    loadingText?: string;
 }
 
 export interface IModalState {

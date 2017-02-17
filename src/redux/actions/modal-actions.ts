@@ -1,22 +1,24 @@
-import {createFramework7Action, SHOW_ALERT, CLOSE_ALERT, SHOW_PRELOADER, HIDE_PRELOADER} from './framework7-actions';
+import {ShowAlertAction, CloseAlertAction, ShowPreloaderAction, HidePreloaderAction} from './framework7-actions';
 
-export const showAlert = (text: string, title?: string) => {
-    return createFramework7Action(SHOW_ALERT, {
+export const showAlert = (text: string, title?: string): ShowAlertAction => {
+    return {
+        type: '@@FRAMEWORK7_SHOW_ALERT',
         text,
         title
-    });
+    };
 };
 
-export const closeAlert = () => {
-    return createFramework7Action(CLOSE_ALERT);
+export const closeAlert = (): CloseAlertAction => {
+    return { type: '@@FRAMEWORK7_CLOSE_ALERT' };
 };
 
-export const showPreloader = (title?: string) => {
-    return createFramework7Action(SHOW_PRELOADER, {
-        title
-    });
+export const showPreloader = (loadingText?: string): ShowPreloaderAction => {
+    return {
+        type: '@@FRAMEWORK7_SHOW_PRELOADER',
+        loadingText: loadingText
+    };
 };
 
-export const hidePreloader = () => {
-    return createFramework7Action(HIDE_PRELOADER);
+export const hidePreloader = (): HidePreloaderAction => {
+    return { type: '@@FRAMEWORK7_HIDE_PRELOADER' };
 };

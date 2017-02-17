@@ -10,7 +10,7 @@ export class PreloaderKernel extends StateKernel<IPreloaderState> {
 
     protected handleStateChange(state: IPreloaderState) {        
         if (state.visible) {
-            this.showPreloader(state.title);
+            this.showPreloader(state.loadingText);
         } else {
             this.hidePreloader();
         }        

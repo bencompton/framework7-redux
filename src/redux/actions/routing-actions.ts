@@ -1,12 +1,15 @@
-import {createFramework7Action, NAVIGATE_TO, GO_BACK} from './framework7-actions';
+import {NavigateToAction, GoBackAction} from './framework7-actions';
 
-export const navigateTo = (path: string, replace?: boolean) => {
-    return createFramework7Action(NAVIGATE_TO, {
+export const navigateTo = (path: string, replace?: boolean): NavigateToAction => {
+    return {
+        type: '@@FRAMEWORK7_NAVIGATE_TO',
         path,
         replace
-    });
+    };
 };
 
-export const goBack = () => {
-    return createFramework7Action(GO_BACK);
+export const goBack = (): GoBackAction => {
+    return {
+        type: '@@FRAMEWORK7_GO_BACK'
+    };    
 };
