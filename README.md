@@ -69,6 +69,7 @@ Note that the Framework7 param `router` should be `false` as shown above to disa
 By default, the router in Framework7 React and Framework7 Vue will automatically navigate to different pages when the user clicks an anchor tag with an href attribute. This works well for simpler apps, but for larger and more complex apps, it is recommended to handle all navigation through actions and keep your React / Vue components as dumb as possible. Framework7 Redux makes this easy by providing pre-built actions for navigation:
 
 ```javascript
+import {navigateTo, goBack} from 'framework7-redux'
 
 var routes = [{
   path: '/',
