@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import {combineReducers, Reducer} from 'redux';
 import {RoutingAction, NavigateToAction, GoBackAction} from '../actions/framework7-actions';
 import {IRoutingState} from '../../state/routing-state';
 
@@ -6,7 +6,7 @@ const initialState: IRoutingState = {
     history: []
 };
 
-export const historyReducer = (state: string[] = [], action: RoutingAction) => {
+export const historyReducer: Reducer<string[]> = (state: string[] = [], action: RoutingAction) => {
     switch (action.type) {
         case '@@FRAMEWORK7_NAVIGATE_TO':
             const history = action.replace ? state.slice(0, state.length - 1) : state;

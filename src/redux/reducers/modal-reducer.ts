@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import {combineReducers, Reducer} from 'redux';
 import {ModalAction, ShowAlertAction, CloseAlertAction, ShowPreloaderAction, HidePreloaderAction} from '../actions/framework7-actions';
 import {IModalState, IAlertState, IPreloaderState} from '../../state/modals-state';
 
@@ -12,7 +12,7 @@ const initialPreloaderState = {
     visible: false
 };
 
-export const alertReducer: Redux.Reducer<IAlertState> = (state: IAlertState = initialAlertState, action: ModalAction) => {
+export const alertReducer: Reducer<IAlertState> = (state: IAlertState = initialAlertState, action: ModalAction) => {
     switch (action.type) {
         case '@@FRAMEWORK7_SHOW_ALERT':
             return {
@@ -29,7 +29,7 @@ export const alertReducer: Redux.Reducer<IAlertState> = (state: IAlertState = in
     }
 };
 
-export const preloaderReducer: Redux.Reducer<IPreloaderState> = (state: IPreloaderState = initialPreloaderState, action: ModalAction) => {
+export const preloaderReducer: Reducer<IPreloaderState> = (state: IPreloaderState = initialPreloaderState, action: ModalAction) => {
     switch (action.type) {
         case '@@FRAMEWORK7_SHOW_PRELOADER':
             return {

@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import {combineReducers, Action} from 'redux';
 
 import {IFramework7State} from '../../state/framework7-state';
 import {routingReducer} from './routing-reducer';
