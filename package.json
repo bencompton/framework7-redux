@@ -1,6 +1,6 @@
 {
   "name": "framework7-redux",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "",
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
