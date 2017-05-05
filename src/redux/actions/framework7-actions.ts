@@ -1,33 +1,33 @@
 //Modal actions
-export type ShowAlertAction = {
+export interface ShowAlertAction {
     type: '@@FRAMEWORK7_SHOW_ALERT';
     title: string;
     text: string;
 };
 
-export type CloseAlertAction = {
+export interface CloseAlertAction {
     type: '@@FRAMEWORK7_CLOSE_ALERT';
 };
 
-export type ShowPreloaderAction = {
+export interface ShowPreloaderAction {
     type: '@@FRAMEWORK7_SHOW_PRELOADER';
     loadingText: string;
 };
 
-export type HidePreloaderAction = {
+export interface HidePreloaderAction {
     type: '@@FRAMEWORK7_HIDE_PRELOADER';
 };
 
 export type ModalAction = ShowAlertAction | CloseAlertAction | ShowPreloaderAction | HidePreloaderAction;
 
 //Routing actions
-export type NavigateToAction = {
+export interface NavigateToAction {
     type: '@@FRAMEWORK7_NAVIGATE_TO';
     path: string;
     replace: boolean;
 };
 
-export type GoBackAction = {
+export interface GoBackAction {
     type: '@@FRAMEWORK7_GO_BACK';
 };
 
