@@ -3,10 +3,17 @@ export interface  StateKernel<TState> {
     onRouterSet?(router?: any): void;
 }
 
+interface ActionListener {
+    actionType: string;
+    callback: (action: any) => void;
+    single: boolean;
+}
+
 export abstract class StateKernel<TState> {    
     private previousState: TState;
     private testMode: boolean;
     private actionDispatchHandler: (action: any) => void;    
+    private actionListeners: ActionListener[] = [];
     protected children: StateKernel<any>[] = [];
     protected framework7: any;
     protected router: any;
@@ -45,7 +52,15 @@ export abstract class StateKernel<TState> {
 
     public setActionDispatchHandler(actionDispatchHandler: (action: any) => void) {
         this.actionDispatchHandler = actionDispatchHandler;
-        this.children.forEach(child => child.setActionDispatchHandler(actionDispatchHandler));
+        this.children.forEach(child => child.setActionDispatchHandler(this.dispatchAction.bind(this)));
+    }
+
+    public listenForAction(actionType: string, callback: (action: any) => void, single: boolean = false) {
+        this.actionListeners.push({
+            actionType,
+            callback,
+            single
+        });
     }
 
     protected abstract handleStateChange(newState: TState): void
@@ -53,5 +68,13 @@ export abstract class StateKernel<TState> {
 
     protected dispatchAction(action: any) {
         this.actionDispatchHandler(action);
+
+        this.actionListeners.forEach(listener => {
+            if (listener.actionType === action.type) {
+                listener.callback(action);
+            }
+        });
+
+        this.actionListeners = this.actionListeners.filter(listener => listener.actionType !== action.type || !listener.single);
     }
 }
