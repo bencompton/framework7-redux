@@ -127,7 +127,7 @@ framework7StateKernel.getActionPromise(closeAlert().type)
   .then(() => store.dispatch(showAlert('Alert closed!')));
 ```
 
-You can then use the promise in the appropriate manner for whatever async action middleware you are using. For example, here is how it would look in [redux-thunk(https://github.com/gaearon/redux-thunk]):
+You can then use the promise in the appropriate manner for whatever async action middleware you are using. For example, here is how it would look in [redux-thunk](https://github.com/gaearon/redux-thunk):
 
 ```javascript
 const productFetchFailed = () => {
