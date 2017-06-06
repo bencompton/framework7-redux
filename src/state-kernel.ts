@@ -63,6 +63,12 @@ export abstract class StateKernel<TState> {
         });
     }
 
+    public getActionPromise(actionType: string) {
+        return new Promise(resolve => {
+            this.listenForAction(actionType, resolve, true);
+        });
+    }
+
     protected abstract handleStateChange(newState: TState): void
     protected abstract getState(state: any): TState
 
