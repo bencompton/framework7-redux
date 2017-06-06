@@ -33,11 +33,11 @@ import {Framework7StateKernel, framework7Reducer, syncFramework7WithStore} from 
 export const framework7StateKernel = new Framework7StateKernel();
 
 export const store = createStore(
-    combineReducers({
-        framework7: framework7Reducer,
-		...
-		...
-	})
+  combineReducers({
+    framework7: framework7Reducer,
+    ...
+    ...
+  })
 );
 
 syncFramework7WithStore(store, framework7StateKernel);
@@ -50,15 +50,15 @@ import {routes} from './routes';
 import {store, framework7StateKernel} from './store';
 
 const MyApp = () => {
-    return (
-        <Provider store={store}>
-            <Framework7App
-                routes={routes}                
-                router={false}
-				stateKernel={framework7StateKernel}
-			/>
-		</Provider>
-	);
+  return (
+    <Provider store={store}>
+      <Framework7App
+        routes={routes}                
+        router={false}
+        stateKernel={framework7StateKernel}
+      />
+    </Provider>
+  );
 };
 ```
 
@@ -94,23 +94,50 @@ store.dispatch(goBack());
 Framework7 React and Framework7 Vue do not provide components to accomplish things like alert dialogs, confirm dialogs, and the preloader. Instead, they require calling Framework7's API for modals. While this approach is fine for simpler apps, it is better to control modals via actions so their state will be in your store. Modal support is still a work in progress in Framework7 Redux, but a few options are currently supported:
 
 ```javascript
-	import {showAlert, closeAlert, showPreloader, hidePreloader} from 'framework7-redux'
+import {showAlert, closeAlert, showPreloader, hidePreloader} from 'framework7-redux'
 	
-	//Show an alert with no title and the specified alert text
-	store.dispatch(showAlert(('Alert text!'));
+//Show an alert with no title and the specified alert text
+store.dispatch(showAlert(('Alert text!'));
 	
-	//Close the alert
-	store.dispatch(closeAlert());
+//Close the alert
+store.dispatch(closeAlert());
 	
-	//Show an alert with the specified text and title
-	store.dispatch(showAlert(('Alert text!', 'Alert title'));
+//Show an alert with the specified text and title
+store.dispatch(showAlert(('Alert text!', 'Alert title'));
 	
-	//Show the global app loading spinner
-	store.dispatch(showPreloader());
+//Show the global app loading spinner
+store.dispatch(showPreloader());
 	
-	//Hide the global app loading spinner
-	store.dispatch(hidePreloader());
+//Hide the global app loading spinner
+store.dispatch(hidePreloader());
 	
-	//Show the global app loading spinner with custom loading text
-	store.dispatch(showPreloader('Saving...'));	
+//Show the global app loading spinner with custom loading text
+store.dispatch(showPreloader('Saving...'));	
 ```
+
+It is also possible to get a promise that resolves when the user closes an alert:
+
+```javascript
+import {showAlert, closeAlert} from 'framework7-redux'
+import {framework7StateKernel} from './store';
+
+store.dispatch(showAlert('Alert text'));
+
+framework7StateKernel.getActionPromise(closeAlert().type)
+  .then(() => store.dispatch(showAlert('Alert closed!')));
+```
+
+You can then use the promise in the appropriate manner for whatever async action middleware you are using. For example, here is how it would look in [redux-thunk(https://github.com/gaearon/redux-thunk]):
+
+```javascript
+const productFetchFailed = () => {
+  return dispatch => {
+    dispatch(showAlert('Product fetch failed!'));
+    
+    //Retry product fetch after the user clicks the "Ok" button on the alert
+    framework7StateKernel.getActionPromise(closeAlert().type)
+      .then(() => dispatch(fetchProducts()))
+  };
+};
+```
+
