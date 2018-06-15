@@ -113,6 +113,15 @@ store.dispatch(hidePreloader());
 	
 //Show the global app loading spinner with custom loading text
 store.dispatch(showPreloader('Saving...'));	
+
+//Show a confirm dialog
+store.dispatch(showConfirm('Are you sure you want to do this?', 'Are you sure?'));
+
+//Cancel a confirm dialog
+store.dispatch(cancelConfirm());
+
+//Accept a confirm dialog
+store.dispatch(acceptConfirm());
 ```
 
 It is also possible to get a promise that resolves when the user closes an alert:
@@ -141,3 +150,22 @@ const productFetchFailed = () => {
 };
 ```
 
+Here is an example of a confirm dialog with redux-thunk:
+
+```javascript
+const someRiskyAction = () => {
+  return dispatch => {
+    dispatch(showConfirm('Are you sure you want to do this?', 'Are you sure?'));
+
+    Promise.race([
+      framework7StateKernel.getActionPromise(acceptConfirm().type).then(() => true),
+      framework7StateKernel.getActionPromise(cancelConfirm().type).then(() => false)
+    ])
+    .then(confirmed => {
+      if (confirmed) {
+        dispatch(completeRiskyAction());
+      }
+    });
+  };
+};
+```
