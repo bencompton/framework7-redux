@@ -1,4 +1,5 @@
-export interface IAlertState {
+export interface IModalMessageState {
+    modalMessageType: 'alert' | 'confirm';
     title: string;
     text: string;    
 }
@@ -9,6 +10,6 @@ export interface IPreloaderState {
 }
 
 export interface IModalState {
-    alert: IAlertState;    
+    modalMessage: IModalMessageState;    
     preloader: IPreloaderState;
 }

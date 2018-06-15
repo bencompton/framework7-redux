@@ -1,8 +1,9 @@
-import {StateKernel} from '../state-kernel';
-import {IModalState} from '../state/modals-state';
-import {IFramework7State} from '../state/framework7-state';
-import {AlertKernel} from './modals/alert-kernel';
-import {PreloaderKernel} from './modals/preloader-kernel';
+import { StateKernel } from '../state-kernel';
+import { IModalState } from '../state/modals-state';
+import { IFramework7State } from '../state/framework7-state';
+import { AlertKernel } from './modals/alert-kernel';
+import { PreloaderKernel } from './modals/preloader-kernel';
+import { ConfirmKernel } from './modals/confirm-kernel';
 
 export class ModalKernel extends StateKernel<IModalState> {
     constructor() {
@@ -10,6 +11,7 @@ export class ModalKernel extends StateKernel<IModalState> {
 
         this.children = [
             new AlertKernel(),
+            new ConfirmKernel(),
             new PreloaderKernel()
         ]
     }

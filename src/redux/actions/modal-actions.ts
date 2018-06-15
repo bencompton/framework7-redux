@@ -1,4 +1,12 @@
-import {ShowAlertAction, CloseAlertAction, ShowPreloaderAction, HidePreloaderAction} from './framework7-actions';
+import {
+    ShowAlertAction,
+    CloseAlertAction,
+    ShowPreloaderAction,
+    HidePreloaderAction,
+    CancelConfirmAction,
+    AcceptConfirmAction,
+    ShowConfirmAction
+} from './framework7-actions';
 
 export const showAlert = (text: string, title?: string): ShowAlertAction => {
     return {
@@ -11,6 +19,22 @@ export const showAlert = (text: string, title?: string): ShowAlertAction => {
 export const closeAlert = (): CloseAlertAction => {
     return { type: '@@FRAMEWORK7_CLOSE_ALERT' };
 };
+
+export const showConfirm = (text: string, title?: string): ShowConfirmAction => {
+    return {
+        type: '@@FRAMEWORK7_SHOW_CONFIRM',
+        text,
+        title
+    }
+}
+
+export const cancelConfirm = (): CancelConfirmAction => {
+    return { type: '@@FRAMEWORK7_CANCEL_CONFIRM' };
+};
+
+export const acceptConfirm = (): AcceptConfirmAction => {
+    return { type: '@@FRAMEWORK7_ACCEPT_CONFIRM' };
+}
 
 export const showPreloader = (loadingText?: string): ShowPreloaderAction => {
     return {

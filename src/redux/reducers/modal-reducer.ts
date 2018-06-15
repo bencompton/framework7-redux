@@ -1,8 +1,19 @@
 import {combineReducers, Reducer} from 'redux';
-import {ModalAction, ShowAlertAction, CloseAlertAction, ShowPreloaderAction, HidePreloaderAction} from '../actions/framework7-actions';
-import {IModalState, IAlertState, IPreloaderState} from '../../state/modals-state';
 
-const initialAlertState = {
+import {
+    ModalAction,
+    ShowAlertAction,
+    CloseAlertAction,
+    ShowPreloaderAction,
+    HidePreloaderAction,
+    ShowConfirmAction,
+    CancelConfirmAction,
+    AcceptConfirmAction
+} from '../actions/framework7-actions';
+import {IModalState, IModalMessageState, IPreloaderState} from '../../state/modals-state';
+
+const initialModalMessageState = {
+    modalMessageType: null,
     title: null,
     text: null
 };
@@ -12,15 +23,28 @@ const initialPreloaderState = {
     visible: false
 };
 
-export const alertReducer: Reducer<IAlertState> = (state: IAlertState = initialAlertState, action: ModalAction) => {
+export const modalMessageReducer: Reducer<IModalMessageState> = (
+    state: IModalMessageState = initialModalMessageState,
+    action: ModalAction
+) => {
     switch (action.type) {
-        case '@@FRAMEWORK7_SHOW_ALERT':
+        case '@@FRAMEWORK7_SHOW_CONFIRM':
             return {
+                modalMessageType: 'confirm',
                 title: action.title,
                 text: action.text                               
             };
+        case '@@FRAMEWORK7_SHOW_ALERT':
+            return {
+                modalMessageType: 'alert',
+                title: action.title,
+                text: action.text                               
+            };
+        case '@@FRAMEWORK7_CANCEL_CONFIRM':
+        case '@@FRAMEWORK7_ACCEPT_CONFIRM':
         case '@@FRAMEWORK7_CLOSE_ALERT':
             return {
+                modalMessageType: null,
                 title: null,
                 text: null
             };            
@@ -47,6 +71,6 @@ export const preloaderReducer: Reducer<IPreloaderState> = (state: IPreloaderStat
 };
 
 export const modalsReducer = combineReducers<IModalState>({
-    alert: alertReducer,
+    modalMessage: modalMessageReducer,
     preloader: preloaderReducer
 });

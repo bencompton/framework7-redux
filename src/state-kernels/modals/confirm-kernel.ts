@@ -1,16 +1,18 @@
-import { closeAlert } from '../../redux/actions/modal-actions';
-import { StateKernel } from '../../state-kernel';
-import { IModalMessageState } from '../../state/modals-state';
+import { acceptConfirm, cancelConfirm } from '../../redux/actions/modal-actions';
+import { IModalState, IModalMessageState } from '../../state/modals-state';
 import { ModalMessageHelper } from './modal-message-helper';
-import { IModalState } from '../../state/modals-state';
+import { StateKernel } from '../../state-kernel';
 
-export class AlertKernel extends StateKernel<IModalMessageState> {
+export class ConfirmKernel extends StateKernel<IModalMessageState> {
     private modalMessageHelper: ModalMessageHelper;
 
     public onFramework7Set(framework7: any) {
         this.modalMessageHelper = new ModalMessageHelper(framework7, [{
             text: 'Ok',
-            onClick: () => this.dispatchAction(closeAlert())
+            onClick: () => this.dispatchAction(acceptConfirm())
+        }, {
+            text: 'Cancel',
+            onClick: () => this.dispatchAction(cancelConfirm())
         }]);
     }
 
@@ -19,7 +21,7 @@ export class AlertKernel extends StateKernel<IModalMessageState> {
     }
 
     protected handleStateChange(state: IModalMessageState) {
-        if (state.modalMessageType === 'alert') {
+        if (state.modalMessageType === 'confirm') {
             this.modalMessageHelper.handleStateChange(state);
         }
     }
