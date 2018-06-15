@@ -38,6 +38,10 @@ export abstract class StateKernel<TState> {
         });
     }
 
+    public setTestMode(testMode: boolean) {
+        this.testMode = testMode;
+    }
+
     public setFramework7(framework7: any) {
         this.framework7 = framework7;
         this.children.forEach(child => child.setFramework7(framework7));
@@ -69,10 +73,7 @@ export abstract class StateKernel<TState> {
         });
     }
 
-    protected abstract handleStateChange(newState: TState): void
-    protected abstract getState(state: any): TState
-
-    protected dispatchAction(action: any) {
+    public dispatchAction(action: any) {
         this.actionDispatchHandler(action);
 
         this.actionListeners.forEach(listener => {
@@ -82,5 +83,8 @@ export abstract class StateKernel<TState> {
         });
 
         this.actionListeners = this.actionListeners.filter(listener => listener.actionType !== action.type || !listener.single);
-    }
+    }    
+
+    protected abstract handleStateChange(newState: TState): void;
+    protected abstract getState(state: any): TState;
 }
