@@ -5,7 +5,7 @@ import {navigateTo} from '../redux/actions/routing-actions';
 import {HistoryReconciler} from './routing/history-reconciler';
 
 export class RoutingKernel extends StateKernel<IRoutingState> {
-    private previousHistory: string[];
+    private router: any;
 
     protected getState(fullState: IFramework7State) {
         return fullState.routing;
@@ -16,12 +16,20 @@ export class RoutingKernel extends StateKernel<IRoutingState> {
     }
 
     onFramework7Set() {
-        this.initializeHistory();
+        this.framework7.once('pageInit', () => this.initializeHistory());        
     }
 
     private initializeHistory() {
-        if (this.mainView.history.length) {
-            this.mainView.history.forEach(f7HistoryUrl => {
+        const mainView = this.framework7.views.find(view => view.main);
+
+        if (!mainView) {
+            throw new Error('Framework7 Redux requires a main view');
+        }
+
+        this.router = mainView.router;
+
+        if (this.router.history.length) {
+            this.router.history.forEach(f7HistoryUrl => {
                 this.dispatchAction(navigateTo(f7HistoryUrl));
             });            
         }        
@@ -30,32 +38,16 @@ export class RoutingKernel extends StateKernel<IRoutingState> {
     private reconcileHistories(newHistory: string[]) {
         if (!this.router || !this.framework7) return;
 
-        const reconciler = new HistoryReconciler(this.router, this.mainView.history, newHistory);
+        const reconciler = new HistoryReconciler(this.router, this.router.history, newHistory);
         
         reconciler
             .getOperationsToReconcileHistories()
             .forEach(operation => {
                 if (operation.forward) {                    
-                    this.router.changeRoute(operation.url, this.mainView, { reload: operation.replace, url: operation.url });                    
+                    this.router.navigate(operation.url, { reloadCurrent: operation.replace });                    
                 } else {
-                    this.mainView.router.back();
+                    this.router.back();
                 }
             });
-    }
-
-    private get mainView() {
-        const mainView = this.framework7 && this.framework7.views && this.framework7.views.reduce((mainView, nextView) => {
-            if (nextView.main) {
-                return nextView;
-            } else {
-                return mainView;
-            }
-        }, null);
-
-        if (!mainView) {
-            throw new Error('No main view found! A main view is required for routing.');
-        }
-
-        return mainView;
     }
 }
