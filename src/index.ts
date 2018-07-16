@@ -17,3 +17,4 @@ export {
     HidePreloaderAction, ModalAction, RoutingAction, NavigateToAction, 
     GoBackAction
 } from './redux/actions/framework7-actions';
+export { framework7ReduxPlugin } from './framework7-redux-plugin';

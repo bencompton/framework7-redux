@@ -16,7 +16,6 @@ export abstract class StateKernel<TState> {
     private actionListeners: ActionListener[] = [];
     protected children: StateKernel<any>[] = [];
     protected framework7: any;
-    protected router: any;
 
     constructor(testMode: boolean = false) {
         this.testMode = testMode;
@@ -46,12 +45,6 @@ export abstract class StateKernel<TState> {
         this.framework7 = framework7;
         this.children.forEach(child => child.setFramework7(framework7));
         if (this.onFramework7Set) this.onFramework7Set(framework7);
-    }
-
-    public setRouter(router: any) {
-        this.router = router;
-        this.children.forEach(child => child.setRouter(router));
-        if (this.onRouterSet) this.onRouterSet(router);
     }
 
     public setActionDispatchHandler(actionDispatchHandler: (action: any) => void) {
