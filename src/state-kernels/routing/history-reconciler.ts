@@ -41,11 +41,11 @@ export class HistoryReconciler {
     }
 
     private get currentF7HistoryPagePath() {
-        return this.currentF7HistoryUrl && this.router.findMatchingRoute(this.currentF7HistoryUrl).route.pagePath;
+        return this.currentF7HistoryUrl && this.router.findMatchingRoute(this.currentF7HistoryUrl).url;
     }
 
     private get currentNewHistoryPagePath() {
-        return this.currentNewHistoryUrl && this.router.findMatchingRoute(this.currentNewHistoryUrl).route.pagePath;
+        return this.currentNewHistoryUrl && this.router.findMatchingRoute(this.currentNewHistoryUrl).url;
     }    
 
     private fastForwardToFirstNonMatchingPage() {
