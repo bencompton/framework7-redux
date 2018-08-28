@@ -52,17 +52,19 @@ import {store, framework7StateKernel} from './store';
 const MyApp = () => {
   return (
     <Provider store={store}>
-      <Framework7App
-        routes={routes}                
-        router={false}
+      <App
+        routes={routes}        
         stateKernel={framework7StateKernel}
+        clicks: {
+            externalLinks: 'a[href="#"]'
+        }	
       />
     </Provider>
   );
 };
 ```
 
-Note that the Framework7 param `router` should be `false` as shown above to disable the default automatic Framework7 routing behavior (as described below) and allow routes to be controlled strictly from actions.
+Note that the Framework7 param `clicks -> externalLinks` should be `a[href="#"]` as shown above to disable the default automatic Framework7 Link routing behavior (as described below) and allow routes to be controlled strictly from actions.
 
 ### Navigation
 
