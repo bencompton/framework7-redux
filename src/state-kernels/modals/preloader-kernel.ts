@@ -18,7 +18,7 @@ export class PreloaderKernel extends StateKernel<IPreloaderState> {
 
     private showPreloader(title: string) {
         if (!this.preloaderModal) {
-            this.preloaderModal = this.framework7.showPreloader(title);
+            this.preloaderModal = this.framework7.preloader.show(title);
         } else {
             this.hidePreloader();
             this.showPreloader(title);
@@ -27,7 +27,7 @@ export class PreloaderKernel extends StateKernel<IPreloaderState> {
 
     private hidePreloader() {
         if (this.preloaderModal) {
-            this.framework7.hidePreloader();
+            this.framework7.preloader.hide();
 
             const tempPreloaderModal = this.preloaderModal;
 
