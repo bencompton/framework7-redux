@@ -25,7 +25,7 @@ export class ModalMessageHelper {
 
     private show(text: string, title: string) {
         if (!this.modal) {
-            this.modal = this.framework7.modal({
+            this.modal = this.framework7.customModal({
                 title,
                 text,
                 buttons: this.buttons
