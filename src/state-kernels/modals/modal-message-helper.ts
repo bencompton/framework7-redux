@@ -25,11 +25,12 @@ export class ModalMessageHelper {
 
     private show(text: string, title: string) {
         if (!this.modal) {
-            this.modal = this.framework7.customModal({
-                title,
+            this.modal = this.framework7.dialog.create({
                 text,
+                title,
                 buttons: this.buttons
-            }); 
+            })
+            .open(); 
         } else {
             this.close();
             this.show(text, title);
@@ -38,7 +39,7 @@ export class ModalMessageHelper {
 
     private close() {
         if (this.modal) {
-            this.framework7.closeModal(this.modal);
+            this.framework7.dialog.close();
             this.modal = null;
         }
     }    
