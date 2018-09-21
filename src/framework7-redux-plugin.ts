@@ -12,5 +12,8 @@ export const framework7ReduxPlugin = {
             throw new Error('Framework7 Redux plug-in requires a state kernel');
           }          
         }
+    },
+    install() {
+      // Nothing to do here
     }
 };
