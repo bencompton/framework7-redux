@@ -15,5 +15,8 @@ export const framework7ReduxPlugin = {
     },
     install() {
       // Nothing to do here
+    },
+    create() {
+      // Nothing to do here
     }
 };
