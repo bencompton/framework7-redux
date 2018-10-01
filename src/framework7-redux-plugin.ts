@@ -17,6 +17,6 @@ export const framework7ReduxPlugin = {
       // Nothing to do here
     },
     create(instance: any) {
-      // Nothing to do here
+      return () => {};
     }
 };
