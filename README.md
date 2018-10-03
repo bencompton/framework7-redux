@@ -199,3 +199,16 @@ const someRiskyAction = () => {
   };
 };
 ```
+### Selectors
+
+Framework7 Redux provides some selectors to retrieve info from your state:
+
+```javascript
+import { getCurrentRoute, getPreviousRoute } from 'framework7-redux';
+
+// Returns the current URL in the history or undefined if none
+const currentUrl = getCurrentRoute(store.getState());
+
+// Returns the previous URL in the history or undefined if none
+const previousUrl = getPreviousRoute(store.getState());
+```
