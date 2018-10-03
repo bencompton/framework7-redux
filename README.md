@@ -13,9 +13,15 @@ Note that **this library is not mandatory** for using Redux with Framework7 and 
 
 If you want to control things like navigation and alert dialogs from Redux actions and want these things to work when you do server rendering or time-travel debugging, that's when you need to use Framework7 Redux. If you just want your components to be controlled by state and are fine with navigation and modals being handled outside of Redux, then you don't need Framework7 Redux.
 
-### Setup
+### Getting started
 
-First, pull down Framework7 Redux from NPM like so:
+#### Starter template
+
+The simplest way to get started is to use the [Framework7 + React + Redux starter template](https://github.com/bencompton/framework7-redux-app-template).
+
+#### Custom setup
+
+Pull down Framework7 Redux from NPM like so:
 
 ```
 npm install --save framework7-redux
