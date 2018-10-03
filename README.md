@@ -1,5 +1,5 @@
 # Framework7 Redux
-### Redux bindings to keep your Redux store in sync with Framework7
+### Framework7 plug-in to keep your Redux store in sync with Framework7
 
 [Framework7](https://github.com/nolimits4web/Framework7) has functionality like routing and showing + hiding modals. This means that there is state in Framework7 for things like the current URL, whether or not a modal is showing, etc. This state is therefore not available in your store, which means that things like time travel debugging and server rendering with server state sent to the client state won't work.
 
