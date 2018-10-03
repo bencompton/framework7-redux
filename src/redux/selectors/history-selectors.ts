@@ -1,5 +1,5 @@
 const checkState = (state: any) => {
-    if (!state.framework7 || !state.framework7.routing || !state.framework7.state.routing.history) {
+    if (!state.framework7 || !state.framework7.routing || !state.framework7.routing.history) {
         throw new Error('State must contain a property called "framework7" and must be controlled by the framework7-redux reducer!');
     }
 };

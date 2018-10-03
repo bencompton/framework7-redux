@@ -199,6 +199,7 @@ const someRiskyAction = () => {
   };
 };
 ```
+
 ### Selectors
 
 Framework7 Redux provides some selectors to retrieve info from your state:
