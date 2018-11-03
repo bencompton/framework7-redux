@@ -48,6 +48,9 @@ syncFramework7WithStore(store, framework7StateKernel);
 Finally, configure your root Framework7 app React component:
 
 ```javascript
+import Framework7 from 'framework7/framework7.esm.bundle';
+import Framework7React, { App, Views } from 'framework7-react';
+
 import { routes } from './routes';
 import { store, framework7StateKernel } from './store';
 import { framework7ReduxPlugin } from 'framework7-redux';
@@ -66,6 +69,9 @@ const params = {
     closeByBackdropClick: false // Bypass the built-in routing when clicking popup backdrops
   }
 };
+
+Framework7.use(Framework7React);
+Framework7.use(framework7ReduxPlugin);
 
 const MyApp = () => {
   return (
