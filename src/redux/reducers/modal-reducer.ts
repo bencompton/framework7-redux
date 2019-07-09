@@ -1,24 +1,17 @@
 import {combineReducers, Reducer} from 'redux';
 
 import {
-    ModalAction,
-    ShowAlertAction,
-    CloseAlertAction,
-    ShowPreloaderAction,
-    HidePreloaderAction,
-    ShowConfirmAction,
-    CancelConfirmAction,
-    AcceptConfirmAction
+    ModalAction
 } from '../actions/framework7-actions';
 import {IModalState, IModalMessageState, IPreloaderState} from '../../state/modals-state';
 
-const initialModalMessageState = {
+const initialModalMessageState: IModalMessageState = {
     modalMessageType: null,
     title: null,
     text: null
 };
 
-const initialPreloaderState = {
+const initialPreloaderState: IPreloaderState = {
     loadingText: null,
     visible: false
 };

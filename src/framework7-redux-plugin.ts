@@ -4,10 +4,10 @@ export const framework7ReduxPlugin = {
     name: 'framework7-redux',
     on: {
         init: function () {
-          var app = this;
+          const app: any = this;
 
           // Make sure links in Framework7 don't change the URL
-          app.on('click', (e) => {				
+          app.on('click', (e: any) => {				
             const clicked = app.$(e.target);
             const clickedLink = clicked.closest('a');
             const isLink = clickedLink.length > 0;				
