@@ -129,6 +129,9 @@ store.dispatch(navigateTo('/page-1/', true));
 //Go back to the home page
 store.dispatch(goBack());
 
+//Navigate a view other than main view
+store.dispatch(nagivateTo('/left-panel/about/', true, 'left-panel-view'));
+store.dispatch(goBack('left-panel-view');
 ```
 
 ### Modals
