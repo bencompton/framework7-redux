@@ -1,24 +1,31 @@
 import {combineReducers, Reducer} from 'redux';
-import {RoutingAction, NavigateToAction, GoBackAction} from '../actions/framework7-actions';
-import {IRoutingState} from '../../state/routing-state';
+import {RoutingAction} from '../actions/framework7-actions';
+import {IRoutingState, IRoutingHistoryState} from '../../state/routing-state';
 
-const initialState: IRoutingState = {
-    history: []
+const initialState: IRoutingHistoryState = {
+    main: []
 };
 
-export const historyReducer: Reducer<string[]> = (state: string[] = [], action: RoutingAction) => {
+export const historyReducer: Reducer<IRoutingHistoryState> = (state: IRoutingHistoryState = initialState, action: RoutingAction) => {
     switch (action.type) {
         case '@@FRAMEWORK7_NAVIGATE_TO':
-            const history = action.replace ? state.slice(0, state.length - 1) : state;
-             
-            return [            
-                ...history,
-                action.path
-            ];
-        case '@@FRAMEWORK7_GO_BACK':        
-            return [
-                ...state.slice(0, state.length - 1)
-            ]; 
+            let currentHistory = state[action.viewName] || [];
+
+            if (action.replace) {
+                currentHistory = currentHistory.slice(0, state[action.viewName].length - 1)
+            }
+
+            return {
+                ...state,
+                [action.viewName]: [...currentHistory, action.path]
+            };
+        case '@@FRAMEWORK7_GO_BACK':
+            const editedHistory = [...state[action.viewName].slice(0, state[action.viewName].length - 1)];
+        
+            return {
+                ...state,
+                [action.viewName]: editedHistory
+            };
         default:
             return state;
     }

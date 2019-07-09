@@ -50,10 +50,7 @@ export class HistoryReconciler {
 
     private fastForwardToFirstNonMatchingPage() {
         while (this.currentF7HistoryUrl && this.currentNewHistoryUrl && this.currentF7HistoryPagePath === this.currentNewHistoryPagePath) {
-            if (
-                (this.currentF7HistoryUrl !== this.currentNewHistoryUrl) || 
-                (this.newHistory.length === 1 && this.framework7History.length) === 1
-            ) {
+            if (this.currentF7HistoryUrl !== this.currentNewHistoryUrl) {
                 this.operations.push({
                     forward: true,
                     url: this.currentNewHistoryUrl,
@@ -82,10 +79,6 @@ export class HistoryReconciler {
                 url: this.framework7History.pop()
             });            
         }
-    }
-
-    private framework7HasHistoryAtCurrentPosition() {
-        return this.framework7History.length >= 0;
     }
 
     private replaceLastFramework7UrlWithNewUrl() {

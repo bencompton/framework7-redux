@@ -46,10 +46,12 @@ export interface NavigateToAction {
     type: '@@FRAMEWORK7_NAVIGATE_TO';
     path: string;
     replace: boolean;
+    viewName?: string;
 };
 
 export interface GoBackAction {
     type: '@@FRAMEWORK7_GO_BACK';
+    viewName?: string;
 };
 
 export type RoutingAction = NavigateToAction | GoBackAction;

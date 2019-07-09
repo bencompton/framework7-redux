@@ -4,14 +4,14 @@ const checkState = (state: any) => {
     }
 };
 
-export const getCurrentRoute = (state: { framework7: any }) => {
+export const getCurrentRoute = (state: { framework7: any }, viewName: string = 'main') => {
     checkState(state);
 
-    return state.framework7.routing.history[state.framework7.routing.history.length - 1];
+    return state.framework7.routing.history[viewName][state.framework7.routing.history[viewName].length - 1] as string;
 };
 
-export const getPreviousRoute = (state: { framework7: any }) => {
+export const getPreviousRoute = (state: { framework7: any }, viewName: string = 'main') => {
     checkState(state);
 
-    return state.framework7.routing.history[state.framework7.routing.history.length - 2];
+    return state.framework7.routing.history[viewName][state.framework7.routing.history[viewName].length - 2] as string;
 };

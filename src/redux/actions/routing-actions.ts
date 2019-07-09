@@ -1,15 +1,17 @@
 import {NavigateToAction, GoBackAction} from './framework7-actions';
 
-export const navigateTo = (path: string, replace?: boolean): NavigateToAction => {
+export const navigateTo = (path: string, replace?: boolean, viewName: string = 'main'): NavigateToAction => {
     return {
         type: '@@FRAMEWORK7_NAVIGATE_TO',
         path,
-        replace
+        replace,
+        viewName
     };
 };
 
-export const goBack = (): GoBackAction => {
+export const goBack = (viewName: string = 'main'): GoBackAction => {
     return {
-        type: '@@FRAMEWORK7_GO_BACK'
+        type: '@@FRAMEWORK7_GO_BACK',
+        viewName
     };    
 };

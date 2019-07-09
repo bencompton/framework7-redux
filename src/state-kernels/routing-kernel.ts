@@ -5,14 +5,14 @@ import {navigateTo} from '../redux/actions/routing-actions';
 import {HistoryReconciler} from './routing/history-reconciler';
 
 export class RoutingKernel extends StateKernel<IRoutingState> {
-    private router: any;
-
     protected getState(fullState: IFramework7State) {
         return fullState.routing;
     }
 
-    protected handleStateChange(state: IRoutingState) {        
-        this.reconcileHistories(state.history);        
+    protected handleStateChange(state: IRoutingState) {
+        Object.keys(state.history).forEach((viewName) => {
+            this.reconcileHistories(viewName, state.history[viewName]);        
+        });
     }
 
     onFramework7Set() {
@@ -20,33 +20,52 @@ export class RoutingKernel extends StateKernel<IRoutingState> {
     }
 
     private initializeHistory() {
-        const mainView = this.framework7.views.find(view => view.main);
+        const mainView = this.framework7.views.find((view: any) => view.main);
 
         if (!mainView) {
             throw new Error('Framework7 Redux requires a main view');
         }
 
-        this.router = mainView.router;
+        this.framework7.views.forEach((view: any) => {
+            const router = view.router;
 
-        if (this.router.history.length) {
-            this.router.history.forEach(f7HistoryUrl => {
-                this.dispatchAction(navigateTo(f7HistoryUrl));
-            });            
-        }        
+            if (router.history.length) {
+                router.history.forEach((f7HistoryUrl: string) => {
+                    this.dispatchAction(navigateTo(f7HistoryUrl, false, view.name || view.main && 'main'));
+                });
+            }
+        });
     }
 
-    private reconcileHistories(newHistory: string[]) {
-        if (!this.router || !this.framework7) return;
+    private reconcileHistories(viewName: string, newHistory: string[]) {
+        if (!this.framework7) return;
 
-        const reconciler = new HistoryReconciler(this.router, this.router.history, newHistory);
+        const view = this.framework7.views.find((view: any) => {
+            if (viewName === 'main') {
+                return view.main;
+            } else {
+                return view.name === viewName;
+            }
+        });
+
+        if (!view) {
+            // If view no longer exists, ignore it for now. The state for that view will get preserved in the store
+            // and if that view gets recreated at some point, it will be restored to the correct state. For example,
+            // if a page is using a routable panel that has a view with multiple pages, and that routable panel gets
+            // destroyed after moving elsewhere, and then gets recreated after navigating back to the original page,
+            // this will preserve the page in the panel where the user left off.
+            return;
+        }
+
+        const reconciler = new HistoryReconciler(view.router, view.router.history, newHistory);
         
         reconciler
             .getOperationsToReconcileHistories()
             .forEach(operation => {
                 if (operation.forward) {                    
-                    this.router.navigate(operation.url, { reloadCurrent: operation.replace });                    
+                    view.router.navigate(operation.url, { reloadCurrent: operation.replace });                    
                 } else {
-                    this.router.back();
+                    view.router.back();
                 }
             });
     }
