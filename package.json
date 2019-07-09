@@ -2,7 +2,7 @@
   "name": "framework7-redux",
   "version": "3.0.3",
   "description": "",
-  "main": "./dist/index.js",
+  "main": "./dist/src/index.js",
   "scripts": {
     "build": "tsc"
   },
