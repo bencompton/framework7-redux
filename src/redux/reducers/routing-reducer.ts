@@ -12,7 +12,7 @@ export const historyReducer: Reducer<IRoutingHistoryState> = (state: IRoutingHis
             let currentHistory = state[action.viewName] || [];
 
             if (action.replace) {
-                currentHistory = currentHistory.slice(0, state[action.viewName].length - 1)
+                currentHistory = currentHistory.slice(0, currentHistory.length - 1);
             }
 
             return {
